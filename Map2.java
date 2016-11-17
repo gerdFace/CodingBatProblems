@@ -67,6 +67,7 @@ they appear in the array.*/
 Loop over the given array of strings to build a result string like this: when a string appears
 the 2nd, 4th, 6th, etc. time in the array, append the string to the result. Return the empty string if no
 string appears a 2nd time.*/
+
 //Needed help on this one. Review!!!!
     public String wordAppend(String[] strings) {
         Map<String, Integer> map = new HashMap<String, Integer>();
@@ -84,4 +85,70 @@ string appears a 2nd time.*/
         }
         return result;
     }
+
+/*Given an array of strings, return a Map<String, Boolean> where each different string is a key and its
+value is true if that string appears 2 or more times in the array.*/
+
+    public Map<String, Boolean> wordMultiple(String[] strings) {
+        Map<String, Boolean> map = new HashMap<String, Boolean>();
+        Boolean duplicateStrings;  //Originally had duplicateStrings initialized as false outside of the for loop. This caused some tests to fail.
+        for (String s:strings) {
+            if (map.containsKey(s)) {
+                duplicateStrings = true;
+            } else duplicateStrings = false;
+            map.put(s, duplicateStrings);
+        }
+        return map;
+    }
+
+/*We'll say that 2 strings "match" if they are non-empty and their first chars are the same. Loop over
+and then return the given array of non-empty strings as follows: if a string matches an earlier string
+in the array, swap the 2 strings in the array. When a position in the array has been swapped, it no longer matches
+anything. Using a map, this can be solved making just one pass over the array. More difficult than it looks.*/
+    public String[] allSwap(String[] strings) {
+        Map<String, Integer> map = new HashMap<String, Integer>();
+        int count = 0;
+        for (String s:strings) {          //This could be done using a standard for loop, incrementing count in the loop statement.
+            String key = s.substring(0, 1);
+
+            if (map.containsKey(key)) {
+                int position = map.get(key);
+                String temp = strings[position];
+                strings[position] = strings[count];
+                strings[count] = temp;
+
+                map.remove(key);
+            } else {
+                map.put(key, count);
+            }
+            count++;
+        }
+        return strings;
+    }
+
+/*We'll say that 2 strings "match" if they are non-empty and their first chars are the same. Loop over and then
+return the given array of non-empty strings as follows: if a string matches an earlier string in the array,
+swap the 2 strings in the array. A particular first char can only cause 1 swap, so once a char has caused a swap, its
+later swaps are disabled. Using a map, this can be solved making just one pass over the array. More difficult than it looks.*/
+    public String[] firstSwap(String[] strings) {
+        Map<String, Integer> map = new HashMap<String, Integer>();
+
+        for (int i = 0; i < strings.length; i++) {
+            String key = strings[i].substring(0, 1);
+            if (map.containsKey(key)) {
+                int match = map.get(key);
+                if (match == -1) {         //Set value for key as -1 for flag, continue statement breaks if and starts at else statement
+                    continue;
+                }
+                String temp = strings[match];
+                strings[match] = strings[i];
+                strings[i] = temp;
+                map.put(key, -1);
+            } else {
+                map.put(key, i);
+            }
+        }
+        return strings;
+    }
+
 }

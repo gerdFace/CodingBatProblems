@@ -345,5 +345,6 @@ return a new array with the first element of each array. If either array is leng
         }
         return new int[] {a[0], b[0]};
     }
+
 }
 
