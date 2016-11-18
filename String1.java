@@ -1,5 +1,5 @@
 
-public class StringProblems {
+public class String1 {
     /*CodingBat problem --must return first and second character if they
     * are 'o' or 'z', respectively.*/
     public String startOz(String str) {
