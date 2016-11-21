@@ -50,8 +50,7 @@ public class String2 {
     public boolean endOther(String a, String b) {
         String lilA = a.toLowerCase();
         String lilB = b.toLowerCase();
-        if (lilA.endsWith(lilB) || lilB.endsWith(lilA)) return true;
-        return false;
+        return (lilA.endsWith(lilB) || lilB.endsWith(lilA));
     }
 
     /*Return true if the given string contains an appearance of "xyz" where the xyz is not directly preceeded
@@ -131,4 +130,78 @@ public class String2 {
         }
         return newString;
     }
+
+    /*Given a string and an int n, return a string made of n repetitions of the last n characters of the string.
+    You may assume that n is between 0 and the length of the string, inclusive.*/
+    public String repeatEnd(String str, int n) {
+        String lastN = "";
+        for (int i = 0; i < n; i++) {
+            lastN += str.substring(str.length()-n, str.length());
+        }
+        return lastN;
+    }
+
+    /*Given a string and an int n, return a string made of the first n characters of the string, followed by the
+    first n-1 characters of the string, and so on. You may assume that n is between 0 and the length of the string,
+    inclusive (i.e. n >= 0 and n <= str.length()).*/
+    public String repeatFront(String str, int n) {
+        String lastN = "";
+        int newN = n;
+        for (int i = 0; i < n; i++) {
+            lastN += str.substring(0, newN);
+            newN--;
+        }
+        return lastN;
+    }
+
+    /*Given two strings, word and a separator sep, return a big string made of count occurrences of the
+    word, separated by the separator string.*/
+    public String repeatSeparator(String word, String sep, int count) {
+        String newString = "";
+        for(int i = 0; i < count; i++) {
+            newString += word;
+            if (i != count - 1) newString +=sep;
+        }
+        return newString;
+    }
+
+    /*Given a string, consider the prefix string made of the first N chars of the string. Does that prefix string
+    appear somewhere else in the string? Assume that the string is not empty and that N is in the range 1..str.length().*/
+    public boolean prefixAgain(String str, int n) {
+        String prefix = str.substring(0, n);
+        for (int i = 0; i < str.length() - n; i++) {
+            if (str.substring(n, str.length()).contains(prefix)) return true;
+        }
+        return false;
+    }
+
+    /*Given a string, does "xyz" appear in the middle of the string? To define middle, we'll say that the number of
+    chars to the left and right of the "xyz" must differ by at most one. This problem is harder than it looks.*/
+    public boolean xyzMiddle(String str) {
+        if (str.length() < 3)  return false;
+
+        int count;
+        boolean isEven = false;
+        if (str.length() % 2 == 0) {
+            count = str.length() / 2 -2;
+            isEven = true;
+        } else {
+            count = str.length() / 2 - 1;
+        }
+        return (str.substring(count, count + 3).equals("xyz")) || (isEven && str.substring(count+1, count+4).equals("xyz"));
+    }
+
+    /*A sandwich is two pieces of bread with something in between. Return the string that is between the first and last
+    appearance of "bread" in the given string, or return the empty string "" if there are not two pieces of bread.*/
+    //Use the freakin' API!!!!
+    public String getSandwich(String str) {
+        String emptyString = "";
+        if (str.length() < 11) return emptyString;
+        int firstIndex = str.indexOf("bread");
+        int lastIndex = str.lastIndexOf("bread");
+
+        if (lastIndex > firstIndex) return str.substring(firstIndex + 5, lastIndex);
+        return emptyString;
+    }
+
 }
