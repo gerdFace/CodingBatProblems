@@ -247,4 +247,22 @@ public class String2 {
     }
     //The same can be achieved by using one line of code:
     return str.replaceAlll("z.p", "zp");
+
+    /*Return a version of the given string, where for every star (*) in the string the star and the chars immediately
+    to its left and right are gone. So "ab*cd" yields "ad" and "ab**cd" also yields "ad".*/
+    public String starOut(String str) {
+        String result = "";
+        for(int i = 0; i < str.length(); i++){
+            if(i != 0 && str.substring(i-1, i).equals("*")) continue;
+            if(str.substring(i, i+1).equals("*")) continue;
+            if(i != str.length() -1 && str.substring(i+1, i+2).equals("*")) continue;
+            result+=str.substring(i,i+1);
+        }
+        return result;
+    }
+    //Using regex and pattern match the same can be achieved with 2 lines of code:
+    public String starOut(String str) {
+        String pattern = "([^*]{0,1})\\*+([^*]{0,1})";
+        return str.replaceAll(pattern, "");
+    }
 }
