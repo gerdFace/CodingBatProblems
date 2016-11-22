@@ -204,4 +204,29 @@ public class String2 {
         return emptyString;
     }
 
+    /*Returns true if for every '*' (star) in the string, if there are chars both immediately before and after the star,
+    they are the same.*/
+    public boolean sameStarChar(String str) {
+
+        for (int i = 1; i < str.length() -1; i++) {
+            if (str.substring(i, i +1).contains("*")) {
+                if (str.charAt(i -1) != str.charAt(i + 1)) return false;
+            }
+        }
+        return true;
+    }
+
+    /*Given a string, compute a new string by moving the first char to come after the next two chars, so "abc"
+    yields "bca". Repeat this process for each subsequent group of 3 chars, so "abcdef" yields "bcaefd".
+    Ignore any group of fewer than 3 chars at the end.*/
+    public String oneTwo(String str) {
+        String newString = "";
+        for (int i = 0; i < str.length() -2; i+=3) {
+            if (!str.substring(i +2, i + 3).isEmpty()) {
+                newString += str.substring(i +1, i +3) + (str.substring(i, i + 1));
+            }
+        }
+        return newString;
+    }
+
 }
