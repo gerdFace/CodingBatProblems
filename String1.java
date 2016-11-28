@@ -1,19 +1,23 @@
 
 public class String1 {
-    /*CodingBat problem --must return first and second character if they
-    * are 'o' or 'z', respectively.*/
-    public String startOz(String str) {
-        String result = "";
-
-        if (str.length() >= 1 && str.charAt(0)== 'o') {
-            result = result + str.charAt(0);
-        }
-
-        if (str.length() >= 2 && str.charAt(1)== 'z') {
-            result = result + str.charAt(1);
-        }
-        return result;
+    /*Given a string name, e.g. "Bob", return a greeting of the form "Hello Bob!".*/
+    public String helloName(String name) {
+        return "Hello " + name + "!";
     }
+
+    /*Given two strings, a and b, return the result of putting them together in the order abba, e.g. "Hi"
+    and "Bye" returns "HiByeByeHi".*/
+    public String makeAbba(String a, String b) {
+        return a + b + b + a;
+    }
+
+    /*The web is built with HTML strings like "<i>Yay</i>" which draws Yay as italic text. In this example, the "i"
+    tag makes <i> and </i> which surround the word "Yay". Given tag and word strings, create the HTML string with
+    tags around the word, e.g. "<i>Yay</i>".*/
+    public String makeTags(String tag, String word) {
+        return "<" + tag + ">" + word + "</" + tag + ">";
+    }
+
 
     //return String word in the middle of String out
     public String makeOutWord(String out, String word) {
@@ -78,10 +82,10 @@ public class String1 {
 
         return noFirstTwoChars + firstChar + secondChar;
     }
-/*simpler solution:
+    //simpler solution:
     public String left2(String str) {
       return str.substring(2) + str.substring(0, 2);
-    }*/
+    }
 
     /*given a string, return a "rotated right 2" version where last two
     * chars are moved to the front*/
@@ -283,7 +287,21 @@ public class String1 {
     }
 
     /*
-    Given a string, return a new string made of 3 copies of the first 2 chars of
+    Given a string, return a new strpublic String wordEnds(String str, String word) {
+  String newString = "";
+  int sLength = str.length();
+  int wLength = word.length();
+
+  for (int i = 0; i < sLength - wLength +1; i++) {
+    String tmp = str.substring(i, i + wLength);
+
+    if (i > 0 && tmp.equals(word))
+      newString += str.substring(i -1, i);
+    if (i < sLength - wLength && tmp.equals(word))
+      newString += str.substring(i +wLength, i +wLength +1);
+  }
+  return newString;
+}ing made of 3 copies of the first 2 chars of
     the original string. The string may be any length. If there are fewer than 2 chars, use
     whatever is there.*/
     public String extraFront(String str) {

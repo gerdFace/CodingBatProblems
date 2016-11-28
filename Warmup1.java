@@ -1,5 +1,20 @@
 public class Warmup1 {
 
+/*CodingBat problem --must return first and second character if they
+* are 'o' or 'z', respectively.*/
+    public String startOz(String str) {
+        String result = "";
+
+        if (str.length() >= 1 && str.charAt(0)== 'o') {
+            result = result + str.charAt(0);
+        }
+
+        if (str.length() >= 2 && str.charAt(1)== 'z') {
+            result = result + str.charAt(1);
+        }
+        return result;
+    }
+
 /*We'll say that a number is "teen" if it is in the range 13..19 inclusive.
 Given 2 int values, return true if one or the other is teen, but not both.*/
     public boolean loneTeen(int a, int b) {
