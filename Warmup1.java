@@ -36,4 +36,9 @@ string where that "del" has been deleted. Otherwise, return the string unchanged
         return str;
     }
 
+    /*Given three int values, a b c, return the largest.*/
+    public int intMax(int a, int b, int c) {
+        return Math.max(Math.max(a, b), c);
+    }
+
 }
