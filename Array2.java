@@ -214,22 +214,151 @@ public class Array2 {
     }
 
     /*Given an array of ints, return true if the array contains a 2 next to a 2 or a 4 next to a 4, but not both.*/
-        public boolean either24(int[] nums) {
-            boolean contains22 = false;
-            boolean contains44 = false;
+    public boolean either24(int[] nums) {
+        boolean contains22 = false;
+        boolean contains44 = false;
 
-            for (int i = 0; i < nums.length -1; i++) {
-                if (nums[i] == 2 && nums[i+1] == 2) {
-                    contains22 = true;
+        for (int i = 0; i < nums.length -1; i++) {
+            if (nums[i] == 2 && nums[i+1] == 2) {
+                contains22 = true;
+            }
+            if (nums[i] == 4 && nums[i+1] == 4) {
+                contains44 = true;
+            }
+        }
+        if (contains22 && contains44) {
+            return false;
+        }
+        return (contains22 || contains44);
+    }
+
+    /*Given arrays nums1 and nums2 of the same length, for every element in nums1, consider the corresponding element in
+    nums2 (at the same index). Return the count of the number of times that the two elements differ by 2 or less, but are not equal.*/
+    public int matchUp(int[] nums1, int[] nums2) {
+        int matchUp = 0;
+
+        for (int i = 0; i < nums1.length; i++) {
+            if (Math.abs(nums1[i] - nums2[i]) <= 2) {
+                matchUp++;
+            }
+            if (nums1[i] == nums2[i]) {
+                matchUp--;
+            }
+        }
+        return matchUp;
+    }
+
+    /*Given an array of ints, return true if the array contains two 7's next to each other, or there are two 7's
+    separated by one element, such as with {7, 1, 7}.*/
+    public boolean has77(int[] nums) {
+        boolean has77 = false;
+
+        for (int i = 0; i < nums.length -1; i++) {
+            if (nums[i] == 7) {
+                if (nums[i+1] == 7) {
+                    has77 = true;
                 }
-                if (nums[i] == 4 && nums[i+1] == 4) {
-                    contains44 = true;
+                if (i + 2 < nums.length && nums[i+2] == 7) {
+                    has77 = true;
                 }
             }
-            if (contains22 && contains44) {
+        }
+        return has77;
+    }
+
+    /*Given an array of ints, return true if there is a 1 in the array with a 2 somewhere later in the array.*/
+    public boolean has12(int[] nums) {
+        boolean has12 = false;
+
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] == 1) {
+                for (int j = i+1; j < nums.length; j++) {
+                    if (nums[j] == 2) {
+                        has12 = true;
+                    }
+                }
+            }
+        }
+        return has12;
+    }
+
+    /*Given an array of ints, return true if the array contains either 3 even or 3 odd values all next to each other.*/
+    public boolean modThree(int[] nums) {
+        if (nums.length < 3) {
+            return false;
+        }
+
+        for (int i = 0; i < nums.length - 2; i++) {
+            if ((nums[i] % 2 == nums[i+1] % 2) && (nums[i+1] % 2 == nums[i+2] % 2)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /*Given an array of ints, return true if the value 3 appears in the array exactly 3 times, and no 3's are next to each other.*/
+    public boolean haveThree(int[] nums) {
+        int haveThree = 0;
+
+        if(nums.length >= 1 && nums[0] == 3)
+            haveThree++;
+
+        for(int i = 1; i < nums.length; i++) {
+            if(nums[i - 1] == 3 && nums[i] == 3)
+                return false;
+
+            if(nums[i] == 3)
+                haveThree++;
+        }
+
+        return haveThree == 3;
+    }
+
+    /*Given an array of ints, return true if every 2 that appears in the array is next to another 2.*/
+    public boolean twoTwo(int[] nums) {
+
+        if(nums.length == 1 && nums[0] == 2) {
+            return false;
+        }
+
+        if(nums.length >= 2 && ((nums[0] == 2 && nums[1] != 2) || (nums[nums.length-1] == 2 && nums[nums.length -2] != 2))) {
+            return false;
+        }
+
+        for (int i = 1; i < nums.length -1; i++) {
+            if (nums[i] == 2 && nums[i-1] != 2 && nums[i+1] != 2) {
                 return false;
             }
-            return (contains22 || contains44);
         }
+        return true;
     }
+    /*Return true if the group of N numbers at the start and end of the array are the same. For example, with {5, 6, 45, 99, 13, 5, 6},
+    the ends are the same for n=0 and n=2, and false for n=1 and n=3. You may assume that n is in the range 0..nums.length inclusive.*/
+    public boolean sameEnds(int[] nums, int len) {
+        for (int i = 0, j = nums.length - len; i < len; i++, j++)
+            if (nums[i] != nums[j]) return false;
+        return true;
+    }
+
+    /*Return true if the array contains, somewhere, three increasing adjacent numbers like .... 4, 5, 6, ... or 23, 24, 25.*/
+    public boolean tripleUp(int[] nums) {
+        for (int i = 0; i < nums.length -2; i++) {
+            if ((nums[i] == nums[i+1] - 1) && (nums[i+1] == nums[i+2] -1)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /*Given start and end numbers, return a new array containing the sequence of integers from start up to but not
+    including end, so start=5 and end=10 yields {5, 6, 7, 8, 9}. The end number will be greater or equal to the start
+    number. Note that a length-0 array is valid. (See also: FizzBuzz Code)*/
+    public int[] fizzArray3(int start, int end) {
+        int[] newFizzArray = new int[end-start];
+        for (int i = start, j = 0; i < end; i++, j++) {
+            newFizzArray[j] = i;
+        }
+        return newFizzArray;
+    }
+
 }

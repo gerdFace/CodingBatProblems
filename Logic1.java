@@ -121,5 +121,83 @@ public class Logic1 {
         return isSpecial;
     }
 
+    /*Return true if the given non-negative number is 1 or 2 more than a multiple of 20. See also: Introduction to Mod*/
+    public boolean more20(int n) {
+        if ((n % 20 == 1) || (n % 20 == 2)) {
+            return true;
+        }
+        return false;
+    }
+
+    /*Return true if the given non-negative number is a multiple of 3 or 5, but not both. Use the % "mod"
+    operator -- see Introduction to Mod*/
+    public boolean old35(int n) {
+        return ((n % 3 == 0 && n % 5 != 0) || (n % 5 == 0 && n % 3 != 0));
+    }
+
+    /*Return true if the given non-negative number is 1 or 2 less than a multiple of 20. So for example 38 and 39
+    return true, but 40 returns false. See also: Introduction to Mod*/
+    public boolean less20(int n) {
+        return (((n+1)%20 == 0) || ((n+2)%20 == 0));
+    }
+
+    /*Given a non-negative number "num", return true if num is within 2 of a multiple of 10. Note: (a % b) is the
+    remainder of dividing a by b, so (7 % 5) is 2. See also: Introduction to Mod*/
+    public boolean nearTen(int num) {
+        return (((num+1)%10 == 0) || ((num+2)%10 == 0) || (num%10 == 1) || (num%10 == 2) || (num%10 ==0));
+    }
+
+    /*Given 2 ints, a and b, return their sum. However, "teen" values in the range 13..19 inclusive, are extra lucky.
+    So if either value is a teen, just return 19.*/
+    public int teenSum(int a, int b) {
+        if ((a >= 13 && a <= 19) || (b >= 13 && b <= 19)) {
+            return 19;
+        } else {
+            return a + b;
+        }
+    }
+
+    /*Your cell phone rings. Return true if you should answer it. Normally you answer, except in the morning you only
+    answer if it is your mom calling. In all cases, if you are asleep, you do not answer.*/
+    public boolean answerCell(boolean isMorning, boolean isMom, boolean isAsleep) {
+        if (isAsleep) {
+            return false;
+        }
+
+        if (isMorning && !isMom) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /*Return an array that is "left shifted" by one -- so {6, 2, 5, 3} returns {2, 5, 3, 6}. You may modify and return
+    the given array, or return a new array.*/
+    public int[] shiftLeft(int[] nums) {
+        if (nums.length >= 2) {
+            int lastNum = nums[0];
+            for (int i = 0; i < nums.length -1; i++ ) {
+                nums[i] = nums[i+1];
+            }
+            nums[nums.length -1] = lastNum;
+        }
+        return nums;
+    }
+
+    /*For each multiple of 10 in the given array, change all the values following it to be that multiple of 10,
+    until encountering another multiple of 10. So {2, 10, 3, 4, 20, 5} yields {2, 10, 10, 10, 20, 20}.*/
+    public int[] tenRun(int[] nums) {
+        int temp = -1;
+        for (int i = 0; i < nums.length; i++ ) {
+            if (nums[i]%10 == 0) {
+                temp = nums[i];
+            }
+            else if (temp != -1) {
+                nums[i] = temp;
+            }
+        }
+        return nums;
+    }
+
 }
 
