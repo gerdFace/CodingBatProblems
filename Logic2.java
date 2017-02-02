@@ -83,6 +83,58 @@ public class Logic2 {
         return num;
     }
 
+    /*Given three ints, a b c, return true if one of b or c is "close" (differing from a by at most 1), while the
+    other is "far", differing from both other values by 2 or more. Note: Math.abs(num) computes the absolute value
+    of a number.*/
+//    Needs work!!
+    public boolean closeFar(int a, int b, int c) {
+        if ((Math.abs(a - b) <= 1) && (Math.abs(a - c) >= 2 && Math.abs(b - c) >= 2)) {
+            return true;
+        }
+        if ((Math.abs(a - c) <= 1) && (Math.abs(a - b) >= 2 && Math.abs(b - c) >= 2)) {
+            return true;
+        }
+        return false;
+    }
+
+    /*Given 2 int values greater than 0, return whichever value is nearest to 21 without going over. Return 0 if they
+    both go over.*/
+    public int blackjack(int a, int b) {
+        if (a > 21 && b <= 21) {
+            return b;
+        }
+        if (b > 21 && a <= 21) {
+            return a;
+        }
+        if (a <= 21 && b <= 21) {
+            return Math.max(a, b);
+        } else {
+            return 0;
+        }
+
+    }
+//    Cleaner solution
+    public int blackjack(int a, int b) {
+        int aVal = (a > 21) ? 0 : a;
+        int bVal = (b > 21) ? 0 : b;
+
+        return Math.max(aVal, bVal);
+    }
+
+    /*Given three ints, a b c, one of them is small, one is medium and one is large. Return true if the three values are
+    evenly spaced, so the difference between small and medium is the same as the difference between medium and large.*/
+    public boolean evenlySpaced(int a, int b, int c) {
+        double maxVal = Math.max(Math.max(a, b), c);
+        double minVal = Math.min(Math.min(a, b), c);
+        double midVal = (a + b + c) - (maxVal + minVal);
+
+        if (maxVal - midVal == midVal - minVal) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 }
 
 
