@@ -124,15 +124,36 @@ public class Logic2 {
     /*Given three ints, a b c, one of them is small, one is medium and one is large. Return true if the three values are
     evenly spaced, so the difference between small and medium is the same as the difference between medium and large.*/
     public boolean evenlySpaced(int a, int b, int c) {
-        double maxVal = Math.max(Math.max(a, b), c);
-        double minVal = Math.min(Math.min(a, b), c);
-        double midVal = (a + b + c) - (maxVal + minVal);
+        int maxVal = Math.max(Math.max(a, b), c);
+        int minVal = Math.min(Math.min(a, b), c);
+        int middleVal = (a + b + c) - (maxVal + minVal);
 
-        if (maxVal - midVal == midVal - minVal) {
+        if (maxVal - middleVal == middleVal - minVal) {
             return true;
         } else {
             return false;
         }
+    }
+
+    /*We want make a package of goal kilos of chocolate. We have small bars (1 kilo each) and big bars (5 kilos each).
+    Return the number of small bars to use, assuming we always use big bars before small bars. Return -1 if it can't
+    be done.*/
+    public int makeChocolate(int small, int big, int goal) {
+        int goalMod5 = goal % 5;
+        int bigBarKilos = big * 5;
+
+        if (bigBarKilos + small >= goal) {
+            if (bigBarKilos == goal) {
+                return 0;
+            }
+            if (bigBarKilos < goal) {
+                return goal - bigBarKilos;
+            }
+            if (goalMod5 <= small) {
+                return goalMod5;
+            }
+        }
+        return -1;
     }
 
 }
