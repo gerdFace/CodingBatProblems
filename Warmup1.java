@@ -41,4 +41,21 @@ string where that "del" has been deleted. Otherwise, return the string unchanged
         return Math.max(Math.max(a, b), c);
     }
 
+    /*Given 2 int values, return whichever value is nearest to the value 10, or return 0 in the event of a tie.
+    Note that Math.abs(n) returns the absolute value of a number.*/
+
+    public int close10(int a, int b) {
+        int absoluteValueA = Math.abs(10 - a);
+        int absoluteValueB = Math.abs(10 - b);
+
+        if (absoluteValueA > absoluteValueB) {
+            return b;
+        }
+        if (absoluteValueA < absoluteValueB) {
+            return a;
+        } else {
+            return 0;
+        }
+    }
+
 }
